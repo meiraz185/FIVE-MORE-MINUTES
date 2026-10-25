@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* 16:9 stage, as large as the viewport allows, letterboxed on black */
+.stage {
+  position: relative;
+  width: min(100vw, calc(100vh * 16 / 9));
+  width: min(100vw, calc(100dvh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Transparent clickable areas over the illustrated buttons */
+.hotspot {
+  position: absolute;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  touch-action: manipulation;
+  z-index: 2;
+}
+
+.hotspot[hidden] {
+  display: none;
+}
+
+.stage.busy .hotspot {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ?debug in the URL shows the hotspots for adjusting coordinates */
+.debug .hotspot {
+  background: rgba(255, 0, 0, 0.25);
+  outline: 2px solid red;
+}
+
+.black {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+  z-index: 3;
+}
+
+.black.on {
+  opacity: 1;
+}
+
+.start {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: #000;
+  color: rgba(255, 255, 255, 0.55);
+  font: 500 14px/1 ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.6s ease;
+}
+
+.start span {
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+.start.gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.start[hidden] {
+  display: none;
+}
+
+@keyframes breathe {
+  50% { opacity: 0.35; }
+}
+
+.mute {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  z-index: 20;
+}
+
+.mute:hover,
+.mute:focus-visible {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mute svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.mute .icon-off,
+.mute[aria-pressed="true"] .icon-on {
+  display: none;
+}
+
+.mute[aria-pressed="true"] .icon-off {
+  display: block;
+}

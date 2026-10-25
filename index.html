@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Five More Minutes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage" class="stage">
+    <img id="scene" class="scene" src="images/1.png" alt="Alarm at 07:00 — Just five more minutes..." draggable="false">
+
+    <!-- Invisible hotspots over the illustrated buttons (positions set in script.js) -->
+    <button id="snooze" class="hotspot" type="button" aria-label="Snooze"></button>
+    <button id="restart" class="hotspot" type="button" aria-label="Try again tomorrow" hidden></button>
+
+    <div id="black" class="black"></div>
+  </main>
+
+  <!-- Minimal start gate, only shown if the browser blocks the first alarm -->
+  <button id="start" class="start" type="button" hidden>
+    <span>click to wake up</span>
+  </button>
+
+  <button id="mute" class="mute" type="button" aria-label="Mute sound" aria-pressed="false">
+    <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4.5 4.5 0 0 1 0 7M18.5 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+
+  <audio id="alarm" src="audio/alarm%20clock.mp3" preload="auto" loop></audio>
+  <audio id="tick" src="audio/clock.mp3" preload="auto"></audio>
+  <audio id="sleep" src="audio/sleep.mp3" preload="auto" loop></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
